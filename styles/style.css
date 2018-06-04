@@ -1,0 +1,9 @@
+.plus {
+    background: rgb(102, 187, 106);
+    background: rgba(102, 187, 106, .3);
+}
+
+.minus {
+    background: rgb(211, 47, 47);
+    background: rgba(211, 47, 47, .3);
+}

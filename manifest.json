@@ -1,0 +1,23 @@
+{
+  "manifest_version": 2,
+  "name": "drupal-patch-color",
+  "version": "1.0",
+  "description": "Add coloration for drupal.org patchs",
+  "icons": {
+    "48": "icons/icon48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.drupal.org/*.diff",
+        "*://*.drupal.org/*.patch"
+      ],
+      "js": [
+        "script.js"
+      ],
+      "css": [
+        "styles/style.css"
+      ]
+    }
+  ]
+}
