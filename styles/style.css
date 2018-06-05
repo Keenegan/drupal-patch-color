@@ -7,3 +7,7 @@
     background: rgb(211, 47, 47);
     background: rgba(211, 47, 47, .3);
 }
+
+.filename {
+    color: rgb(0, 0, 255);
+}
