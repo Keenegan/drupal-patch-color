@@ -9,12 +9,17 @@ let initialLength = 0;
 let edited = 0;
 let editedLength = 0;
 let maxLineNumbers = 0;
+let spaces = '';
 
+//@TODO fix variables names
+//@TODO clean code
+//@TODO add unselect for line numbers
 arrayOfLines.forEach(function (line) {
 
     if (line.startsWith('@@ ', 0)) {
         let lineSplited = line.split(" ");
-        if (lineSplited[3] === '@@') {
+        if (lineSplited[3] === '@@' && Array.isArray(lineSplited)) {
+            spaces = '';
             initial = lineSplited[1].split(',');
             initialLength = initial[1];
             initial = initial[0].replace('-', '');
@@ -28,18 +33,21 @@ arrayOfLines.forEach(function (line) {
             } else {
                 maxLineNumbers = parseInt(edited) + parseInt(editedLength);
             }
+            maxLineNumbers = maxLineNumbers.toString().length;
+            for (i = 0; i < maxLineNumbers; i++) {
+                spaces += ' ';
+            }
         }
     }
 
     if (line.startsWith('+', 0)) {
 
-        document.getElementsByTagName('pre')[0].innerHTML += (initial++) + ' | ';
-        document.getElementsByTagName('pre')[0].innerHTML += ('  ') + ' | ';
-        document.getElementsByTagName('pre')[0].innerHTML += '<span class="plus">' + line + '</span>\n';
+        document.getElementsByTagName('pre')[0].innerHTML += '<span class="unselect">' + (initial++) + ' | ' + spaces + ' | ';
+        document.getElementsByTagName('pre')[0].innerHTML += '<span class="plus">' + line + '</span></span>\n';
 
     }
     else if (line.startsWith('- ', 0)) {
-        document.getElementsByTagName('pre')[0].innerHTML += ('  ') + ' | ';
+        document.getElementsByTagName('pre')[0].innerHTML += (spaces) + ' | ';
         document.getElementsByTagName('pre')[0].innerHTML += (edited++) + ' | ';
         document.getElementsByTagName('pre')[0].innerHTML += '<span class="minus">' + line + '</span>\n';
     }
