@@ -13,7 +13,6 @@ let spaces = '';
 
 //@TODO fix variables names
 //@TODO clean code
-//@TODO add unselect for line numbers
 arrayOfLines.forEach(function (line) {
 
     if (line.startsWith('@@ ', 0)) {
@@ -41,22 +40,17 @@ arrayOfLines.forEach(function (line) {
     }
 
     if (line.startsWith('+', 0)) {
-
-        document.getElementsByTagName('pre')[0].innerHTML += '<span class="unselect">' + (initial++) + ' | ' + spaces + ' | ';
-        document.getElementsByTagName('pre')[0].innerHTML += '<span class="plus">' + line + '</span></span>\n';
-
+        initial++;
+        newLine = '<span class="unselect">' + initial + ' | ' + spaces + ' | </span><span class="plus">' + line + '</span>\n';
     }
     else if (line.startsWith('- ', 0)) {
-        document.getElementsByTagName('pre')[0].innerHTML += (spaces) + ' | ';
-        document.getElementsByTagName('pre')[0].innerHTML += (edited++) + ' | ';
-        document.getElementsByTagName('pre')[0].innerHTML += '<span class="minus">' + line + '</span>\n';
+        edited++;
+        newLine = '<span class="unselect">' + spaces + ' | ' + edited + ' | </span><span class="minus">' + line + '</span>\n';
     }
     else if (line.startsWith(' ', 0)) {
-
-        document.getElementsByTagName('pre')[0].innerHTML += (initial++) + ' | ';
-        document.getElementsByTagName('pre')[0].innerHTML += (edited++) + ' | ';
-        document.getElementsByTagName('pre')[0].innerHTML += line + '\n';
-
+        initial++;
+        edited++;
+        newLine = '<span class="unselect">' + initial + ' | ' + edited + ' | </span>' + line + '\n';
     }
     else if (line.startsWith('diff', 0)) {
 
@@ -76,9 +70,12 @@ arrayOfLines.forEach(function (line) {
             }
         });
 
-        document.getElementsByTagName('pre')[0].innerHTML += lineSplited.join(' ') + '\n';
+        newLine = lineSplited.join(' ') + '\n';
     }
     else {
-        document.getElementsByTagName('pre')[0].innerHTML += line + '\n';
+        newLine = line + '\n';
     }
+
+    // Render the newLine
+    document.getElementsByTagName('pre')[0].innerHTML += newLine;
 });
