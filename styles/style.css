@@ -1,3 +1,7 @@
+body {
+    color: #0F151F;
+}
+
 .plus {
     background: rgb(102, 187, 106);
     background: rgba(102, 187, 106, .3);
@@ -9,7 +13,11 @@
 }
 
 .filename {
-    color: rgb(0, 0, 255);
+    color: black;
+}
+
+b {
+    color: #2d466a;
 }
 
 .unselect {
