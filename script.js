@@ -39,7 +39,10 @@ arrayOfLines.forEach(function (line) {
         }
     }
 
-    if (line.startsWith('+', 0)) {
+    if (line.startsWith('+++ b', 0) || line.startsWith('--- a', 0)) {
+        newLine = line + '\n';
+    }
+    else if (line.startsWith('+', 0)) {
         initial++;
         newLine = '<span class="unselect">' + initial + ' | ' + spaces + ' | </span><span class="plus">' + line + '</span>\n';
     }
