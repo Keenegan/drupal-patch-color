@@ -1,10 +1,11 @@
 # drupal-patch-color
-Web extension that color drupal.org patchs and diffs
 
-This is a dead simple web extension that colorize the lines of diff and patch files in drupal.org.
+Web extension that adds color to patch files on https://www.drupal.org/
 
-![alt tag](https://image.ibb.co/k81w7o/Capture.png "Coloration example")
+![alt tag](https://image.ibb.co/fvwdeo/Capture.png "Coloration example")
 
-You can get it here:
+You can download it here:
 https://chrome.google.com/webstore/detail/drupal-patch-color/acnjdilmnleddbcipfcfbbmhlialepcd
 https://addons.mozilla.org/fr/firefox/addon/drupal-patch-color/
+
+There is currently no configuration to do, just install the module and go to a patch file on drupal.org
