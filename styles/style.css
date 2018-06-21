@@ -37,7 +37,8 @@ b {
     -ms-user-select: none;
     user-select: none;
     display: flex;
-    color: #24292e
+    color: #24292e;
+    margin-right: 10px;
 }
 
 .line-number span {
