@@ -46,16 +46,16 @@ arrayOfLines.forEach(function (line) {
   }
   else if (codeStart == 'true' && line.startsWith('+', 0)) {
     initial++;
-    newLine = '<span class="unselect">' + initial + ' | ' + spaces + ' | </span><span class="plus">' + line + '</span>\n';
+    newLine = '<span class="line"><span class="line-number"><span class="new-line-number">' + initial + '</span><span class="old-line-number">' + spaces + '</span></span><span class="plus">' + line + '</span></span>\n';
   }
   else if (codeStart == 'true' && line.startsWith('-', 0)) {
     edited++;
-    newLine = '<span class="unselect">' + spaces + ' | ' + edited + ' | </span><span class="minus">' + line + '</span>\n';
+    newLine = '<span class="line"><span class="line-number"><span class="new-line-number">' + spaces + '</span><span class="old-line-number">' + edited + '</span></span><span class="minus">' + line + '</span></span>\n';
   }
   else if (codeStart == 'true' && line.startsWith(' ', 0)) {
     initial++;
     edited++;
-    newLine = '<span class="unselect">' + initial + ' | ' + edited + ' | </span>' + line + '\n';
+    newLine = '<span class="line"><span class="line-number"><span class="new-line-number">' + initial + '</span><span class="old-line-number">' + edited + '</span></span><span class="plus">' + line + '</span></span>\n';
   }
   else if (line.startsWith('diff', 0)) {
 

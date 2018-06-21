@@ -20,9 +20,25 @@ b {
     color: #2d466a;
 }
 
-.unselect {
+.line {
+  display: flex;
+  flex-direction: row;
+}
+
+.line-number {
+    border-right: 1px solid black;
     -webkit-user-select: none;  /* Chrome all / Safari all */
     -moz-user-select: none;     /* Firefox all */
     -ms-user-select: none;      /* IE 10+ */
     user-select: none;
+}
+
+.new-line-number {
+    width: 30px;
+    background-color: green;
+}
+
+.old-line-number {
+    width: 30px;
+    background-color: red;
 }
