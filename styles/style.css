@@ -2,6 +2,11 @@ body {
     color: #0F151F;
 }
 
+pre {
+    display: flex;
+    flex-direction: column;
+}
+
 .plus {
     background: rgb(102, 187, 106);
     background: rgba(102, 187, 106, .3);
@@ -21,24 +26,31 @@ b {
 }
 
 .line {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
 }
 
 .line-number {
-    border-right: 1px solid black;
-    -webkit-user-select: none;  /* Chrome all / Safari all */
-    -moz-user-select: none;     /* Firefox all */
-    -ms-user-select: none;      /* IE 10+ */
+    border-right: 1px solid #535A5F;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
+    display: flex;
+    color: #24292e
+}
+
+.line-number span {
+    min-width: 30px;
+    padding-right: 5px;
+    text-align: center;
 }
 
 .new-line-number {
-    width: 30px;
-    background-color: green;
+    border-right: 1px solid #535A5F;
+    padding-left: 0;
 }
 
 .old-line-number {
-    width: 30px;
-    background-color: red;
+    padding-left: 5px;
 }
