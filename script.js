@@ -55,7 +55,7 @@ arrayOfLines.forEach(function (line) {
   else if (codeStart == 'true' && line.startsWith(' ', 0)) {
     initial++;
     edited++;
-    newLine = '<span class="line"><span class="line-number"><span class="new-line-number">' + initial + '</span><span class="old-line-number">' + edited + '</span></span><span class="plus">' + line + '</span></span>\n';
+    newLine = '<span class="line"><span class="line-number"><span class="new-line-number">' + initial + '</span><span class="old-line-number">' + edited + '</span></span><span>' + line + '</span></span>\n';
   }
   else if (line.startsWith('diff', 0)) {
 
