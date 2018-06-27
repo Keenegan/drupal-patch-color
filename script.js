@@ -8,18 +8,13 @@ let initial = 0;
 let initialLength = 0;
 let edited = 0;
 let editedLength = 0;
-let maxLineNumbers = 0;
-let spaces = '';
 let codeStart = 'false';
 
-//@TODO fix variables names
-//@TODO clean code
 arrayOfLines.forEach(function (line) {
 
   if (line.startsWith('@@ ', 0)) {
     let lineSplited = line.split(" ");
     if (lineSplited[3] === '@@') {
-      spaces = '';
       codeStart = 'true';
       initial = lineSplited[1].split(',');
       initialLength = initial[1];
@@ -28,31 +23,21 @@ arrayOfLines.forEach(function (line) {
       edited = lineSplited[2].split(',');
       editedLength = edited[1];
       edited = edited[0].replace('+', '');
-
-      if (parseInt(initial) + parseInt(initialLength) > parseInt(edited) + parseInt(editedLength)) {
-        maxLineNumbers = parseInt(initial) + parseInt(initialLength);
-      } else {
-        maxLineNumbers = parseInt(edited) + parseInt(editedLength);
-      }
-      maxLineNumbers = maxLineNumbers.toString().length;
-      for (i = 0; i < maxLineNumbers; i++) {
-        spaces += ' ';
-      }
     }
   }
 
-  if (codeStart == 'true' && line.startsWith('+++ b', 0) || line.startsWith('--- a', 0)) {
+  if (codeStart === 'true' && line.startsWith('+++ ', 0) || line.startsWith('--- ', 0)) {
     newLine = line + '\n';
   }
-  else if (codeStart == 'true' && line.startsWith('+', 0)) {
+  else if (codeStart === 'true' && line.startsWith('+', 0)) {
     initial++;
-    newLine = '<span class="line"><span class="line-number"><span class="new-line-number">' + initial + '</span><span class="old-line-number">' + spaces + '</span></span><span class="plus">' + line + '</span></span>\n';
+    newLine = '<span class="line"><span class="line-number"><span class="new-line-number">' + initial + '</span><span class="old-line-number"></span></span><span class="plus">' + line + '</span></span>\n';
   }
-  else if (codeStart == 'true' && line.startsWith('-', 0)) {
+  else if (codeStart === 'true' && line.startsWith('-', 0)) {
     edited++;
-    newLine = '<span class="line"><span class="line-number"><span class="new-line-number">' + spaces + '</span><span class="old-line-number">' + edited + '</span></span><span class="minus">' + line + '</span></span>\n';
+    newLine = '<span class="line"><span class="line-number"><span class="new-line-number"></span><span class="old-line-number">' + edited + '</span></span><span class="minus">' + line + '</span></span>\n';
   }
-  else if (codeStart == 'true' && line.startsWith(' ', 0)) {
+  else if (codeStart === 'true' && line.startsWith(' ', 0)) {
     initial++;
     edited++;
     newLine = '<span class="line"><span class="line-number"><span class="new-line-number">' + initial + '</span><span class="old-line-number">' + edited + '</span></span><span>' + line + '</span></span>\n';
