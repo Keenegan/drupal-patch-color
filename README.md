@@ -2,7 +2,7 @@
 
 Web extension that adds color to patch files on https://www.drupal.org/
 
-![alt tag](https://image.ibb.co/fvwdeo/Capture.png "Coloration example")
+![alt tag](https://image.ibb.co/iaeabd/Capture.png "Coloration example")
 
 You can download it here:
 https://chrome.google.com/webstore/detail/drupal-patch-color/acnjdilmnleddbcipfcfbbmhlialepcd
