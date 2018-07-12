@@ -9,6 +9,7 @@ let initialLength = 0;
 let edited = 0;
 let editedLength = 0;
 let codeStart = 'false';
+let newLine = '';
 
 arrayOfLines.forEach(function (line) {
 
@@ -27,20 +28,20 @@ arrayOfLines.forEach(function (line) {
   }
 
   if (codeStart === 'true' && line.startsWith('+++ ', 0) || line.startsWith('--- ', 0)) {
-    newLine = line + '\n';
+    newLine += line + '\n';
   }
   else if (codeStart === 'true' && line.startsWith('+', 0)) {
     initial++;
-    newLine = '<span class="line"><span class="line-number"><span class="new-line-number">' + initial + '</span><span class="old-line-number"></span></span><span class="plus">' + line + '</span></span>\n';
+    newLine += '<span class="line"><span class="line-number"><span class="new-line-number">' + initial + '</span><span class="old-line-number"></span></span><span class="plus">' + line + '</span></span>\n';
   }
   else if (codeStart === 'true' && line.startsWith('-', 0)) {
     edited++;
-    newLine = '<span class="line"><span class="line-number"><span class="new-line-number"></span><span class="old-line-number">' + edited + '</span></span><span class="minus">' + line + '</span></span>\n';
+    newLine += '<span class="line"><span class="line-number"><span class="new-line-number"></span><span class="old-line-number">' + edited + '</span></span><span class="minus">' + line + '</span></span>\n';
   }
   else if (codeStart === 'true' && line.startsWith(' ', 0)) {
     initial++;
     edited++;
-    newLine = '<span class="line"><span class="line-number"><span class="new-line-number">' + initial + '</span><span class="old-line-number">' + edited + '</span></span><span>' + line + '</span></span>\n';
+    newLine += '<span class="line"><span class="line-number"><span class="new-line-number">' + initial + '</span><span class="old-line-number">' + edited + '</span></span><span>' + line + '</span></span>\n';
   }
   else if (line.startsWith('diff', 0)) {
 
@@ -60,12 +61,14 @@ arrayOfLines.forEach(function (line) {
       }
     });
 
-    newLine = lineSplited.join(' ') + '\n';
+    newLine += lineSplited.join(' ') + '\n';
   }
   else {
-    newLine = line + '\n';
+    newLine += line + '\n';
   }
 
-  // Render the newLine
-  document.getElementsByTagName('pre')[0].innerHTML += newLine;
+
 });
+
+  // Render the newLine
+  document.getElementsByTagName('pre')[0].innerHTML += newLine; 
