@@ -1,14 +1,16 @@
-content = document.getElementsByTagName("pre")[0].innerHTML;
+﻿content = document.getElementsByTagName("pre")[0].innerHTML;
 
 arrayOfLines = content.split("\n");
 
-document.getElementsByTagName("pre")[0].innerHTML = "";
+document.getElementsByTagName("pre")[0].innerHTML = '<blocUn></blocUn><blocDeux></blocDeux>';
 
 let initial = 0;
 let initialLength = 0;
 let edited = 0;
 let editedLength = 0;
 let codeStart = 'false';
+let newLineDelete = '';
+let newLineAdded = '';
 
 arrayOfLines.forEach(function (line) {
 
@@ -27,20 +29,24 @@ arrayOfLines.forEach(function (line) {
   }
 
   if (codeStart === 'true' && line.startsWith('+++ ', 0) || line.startsWith('--- ', 0)) {
-    newLine = line + '\n';
+    newLineAdded += line + '</br>';
+	newLineDelete += line + '</br>';
   }
   else if (codeStart === 'true' && line.startsWith('+', 0)) {
     initial++;
-    newLine = '<span class="line"><span class="line-number"><span class="new-line-number">' + initial + '</span><span class="old-line-number"></span></span><span class="plus">' + line + '</span></span>\n';
+    newLineAdded += '<span class="line"><span class="line-number"><span class="green-sign">█</span><span class="new-line-number">' + initial + '</span><span class="old-line-number"></span></span><span class="plus">' + line + '</span></span>\n';
+	newLineDelete += '<span class="empty-sign">/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</span></br>';
   }
   else if (codeStart === 'true' && line.startsWith('-', 0)) {
     edited++;
-    newLine = '<span class="line"><span class="line-number"><span class="new-line-number"></span><span class="old-line-number">' + edited + '</span></span><span class="minus">' + line + '</span></span>\n';
+	newLineAdded += '<span class="empty-sign">/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</span></br>';
+    newLineDelete += '<span class="line"><span class="line-number"><span class="red-sign">█</span><span class="new-line-number"></span><span class="old-line-number">' + edited + '</span></span><span class="minus">' + line + '</span></span>\n';
   }
   else if (codeStart === 'true' && line.startsWith(' ', 0)) {
     initial++;
     edited++;
-    newLine = '<span class="line"><span class="line-number"><span class="new-line-number">' + initial + '</span><span class="old-line-number">' + edited + '</span></span><span>' + line + '</span></span>\n';
+    newLineAdded += '<span class="line"><span class="line-number"><span class="no-sign">█</span><span class="new-line-number">' + initial + '</span><span class="old-line-number">' + edited + '</span></span><span>' + line + '</span></span>\n';
+	newLineDelete += '<span class="line"><span class="line-number"><span class="no-sign">█</span><span class="new-line-number">' + initial + '</span><span class="old-line-number">' + edited + '</span></span><span>' + line + '</span></span>\n';
   }
   else if (line.startsWith('diff', 0)) {
 
@@ -52,7 +58,7 @@ arrayOfLines.forEach(function (line) {
       // Highlight filename
       if (regexAB.test(word) === true) {
         wordSplited = word.split('/');
-        wordSplited[wordSplited.length - 1] = '<span class="filename">' + wordSplited[wordSplited.length - 1] + '</span>';
+        wordSplited[wordSplited.length - 1] = '<span class="filename">' + wordSplited[wordSplited.length - 1] + '</span></br>';
         arrayTest[index] = '<b>' + wordSplited.join('/') + '</b>';
       }
       else {
@@ -60,12 +66,16 @@ arrayOfLines.forEach(function (line) {
       }
     });
 
-    newLine = lineSplited.join(' ') + '\n';
+    newLineAdded += lineSplited.join(' ') + '\n';
+	newLineDelete += lineSplited.join(' ') + '\n';
   }
   else {
-    newLine = line + '\n';
+    newLineAdded += line + '\n';
+	newLineDelete += line + '\n';
   }
 
-  // Render the newLine
-  document.getElementsByTagName('pre')[0].innerHTML += newLine;
 });
+
+  // Render the newLine
+  document.getElementsByTagName('blocUn')[0].innerHTML += newLineDelete; 
+  document.getElementsByTagName('blocDeux')[0].innerHTML += newLineAdded; 
