@@ -4,7 +4,20 @@ body {
 
 pre {
     display: flex;
+}
+blocUn {
+	width:50%; 
+	display: inline-block;
     flex-direction: column;
+	white-space: nowrap;
+	overflow:scroll;
+}
+blocDeux {
+	width:50%; 
+	display: inline-block;
+    flex-direction: column;
+	white-space: nowrap;
+	overflow:scroll;
 }
 
 .plus {
@@ -28,6 +41,7 @@ b {
 .line {
     display: flex;
     flex-direction: row;
+	
 }
 
 .line-number {
@@ -54,4 +68,21 @@ b {
 
 .old-line-number {
     padding-left: 5px;
+}
+
+.green-sign {
+	color: rgb(102, 187, 106);
+}
+
+.red-sign {
+    color: rgb(211, 47, 47);
+}
+
+.no-sign {
+    color: rgb(255, 255, 255);
+}
+
+.empty-sign {
+    color: rgb(224, 204, 159);
+	user-select: none;
 }
