@@ -6,18 +6,18 @@ pre {
     display: flex;
 }
 blocUn {
-	width:50%; 
+	width:50%;
 	display: inline-block;
-    flex-direction: column;
+  flex-direction: column;
 	white-space: nowrap;
-	overflow:scroll;
+	overflow: scroll;
 }
 blocDeux {
-	width:50%; 
+	width:50%;
 	display: inline-block;
-    flex-direction: column;
+  flex-direction: column;
 	white-space: nowrap;
-	overflow:scroll;
+	overflow: scroll;
 }
 
 .plus {
@@ -41,18 +41,16 @@ b {
 .line {
     display: flex;
     flex-direction: row;
-	
+
 }
 
 .line-number {
-    border-right: 1px solid #535A5F;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     display: flex;
     color: #24292e;
-    margin-right: 10px;
 }
 
 .line-number span {
@@ -62,7 +60,6 @@ b {
 }
 
 .new-line-number {
-    border-right: 1px solid #535A5F;
     padding-left: 0;
 }
 
