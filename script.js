@@ -1,8 +1,8 @@
 ﻿content = document.getElementsByTagName("pre")[0].innerHTML;
 
-arrayOfLines = content.split("\n");
+document.getElementsByTagName("pre")[0].innerHTML = '';
 
-document.getElementsByTagName("pre")[0].innerHTML = '<blocUn></blocUn><blocDeux></blocDeux>';
+arrayOfLines = content.split("\n");
 
 let initial = 0;
 let initialLength = 0;
@@ -11,6 +11,8 @@ let editedLength = 0;
 let codeStart = 'false';
 let newLineDeleted = '';
 let newLineAdded = '';
+let newLineMeta = '';
+let blocID = 0;
 
 arrayOfLines.forEach(function (line) {
 
@@ -25,12 +27,24 @@ arrayOfLines.forEach(function (line) {
             edited = lineSplited[2].split(',');
             editedLength = edited[1];
             edited = edited[0].replace('+', '');
+
+            newLineMeta += line + '</br>';
+
+            if (newLineDeleted !== '') {
+                printCodeBlock();
+                newLineDeleted = '';
+                newLineAdded = '';
+            }
+
+            let textnode = document.createElement('blocMeta');
+            textnode.innerHTML = newLineMeta;
+            document.getElementsByTagName("pre")[0].appendChild(textnode);
+            newLineMeta = '';
         }
     }
 
     if (codeStart === 'true' && line.startsWith('+++ ', 0) || line.startsWith('--- ', 0)) {
-        newLineAdded += line + '</br>';
-        newLineDeleted += line + '</br>';
+        newLineMeta += line + '</br>';
     }
     else if (codeStart === 'true' && line.startsWith('+', 0)) {
         initial++;
@@ -66,16 +80,21 @@ arrayOfLines.forEach(function (line) {
             }
         });
 
-        newLineAdded += lineSplited.join(' ') + '\n';
-        newLineDeleted += lineSplited.join(' ') + '\n';
+        newLineMeta += lineSplited.join(' ') + '\n';
     }
     else {
-        newLineAdded += line + '\n';
-        newLineDeleted += line + '\n';
+        newLineMeta += line + '\n';
     }
 
 });
+printCodeBlock();
 
-// Render the newLine
-document.getElementsByTagName('blocUn')[0].innerHTML += newLineDeleted;
-document.getElementsByTagName('blocDeux')[0].innerHTML += newLineAdded;
+
+function printCodeBlock() {
+    let bloc1 = document.createElement('bloc');
+    let bloc2 = document.createElement('bloc');
+    bloc1.innerHTML = newLineDeleted;
+    bloc2.innerHTML = newLineAdded;
+    document.getElementsByTagName("pre")[0].appendChild(bloc1);
+    document.getElementsByTagName("pre")[0].appendChild(bloc2);
+}

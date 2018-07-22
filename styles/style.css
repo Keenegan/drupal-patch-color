@@ -4,22 +4,17 @@ body {
 
 pre {
     display: flex;
+    flex-wrap: wrap;
 }
 
-blocUn {
-    flex: 1;
-    display: inline-block;
-    flex-direction: column;
+bloc {
+    width: 50%;
     white-space: nowrap;
     overflow: scroll;
 }
 
-blocDeux {
-    flex: 1;
-    display: inline-block;
-    flex-direction: column;
-    white-space: nowrap;
-    overflow: scroll;
+blocMeta {
+    width: 100%;
 }
 
 .plus {
