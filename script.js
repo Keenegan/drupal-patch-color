@@ -34,19 +34,19 @@ arrayOfLines.forEach(function (line) {
     }
     else if (codeStart === 'true' && line.startsWith('+', 0)) {
         initial++;
-        newLineAdded += '<span class="line"><span class="line-number"><span class="green-sign">█</span><span class="new-line-number">' + initial + '</span></span><span class="plus">' + line + '</span></span>\n';
-        newLineDeleted += '<span class="empty-sign">/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</span></br>';
+        newLineAdded += '<span class="line"><span class="line-number"><span class="new-line-number">' + initial + '</span></span><span class="plus">' + line + '</span></span>\n';
+        newLineDeleted += '<span class="line"><span class="empty-sign"></span></span></br>';
     }
     else if (codeStart === 'true' && line.startsWith('-', 0)) {
         edited++;
-        newLineAdded += '<span class="empty-sign">/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</span></br>';
-        newLineDeleted += '<span class="line"><span class="line-number"><span class="red-sign">█</span></span><span class="old-line-number">' + edited + '</span><span class="minus">' + line + '</span></span>\n';
+        newLineAdded += '<span class="line"><span class="empty-sign"></span></span></br>';
+        newLineDeleted += '<span class="line"><span class="line-number"><span class="old-line-number">' + edited + '</span></span><span class="minus">' + line + '</span></span>\n';
     }
     else if (codeStart === 'true' && line.startsWith(' ', 0)) {
         initial++;
         edited++;
-        newLineAdded += '<span class="line"><span class="line-number"><span class="no-sign">█</span><span class="new-line-number">' + initial + '</span></span><span>' + line + '</span></span>\n';
-        newLineDeleted += '<span class="line"><span class="line-number"><span class="no-sign">█</span><span class="old-line-number">' + edited + '</span></span><span>' + line + '</span></span>\n';
+        newLineAdded += '<span class="line"><span class="line-number"><span class="new-line-number">' + initial + '</span></span><span>' + line + '</span></span>\n';
+        newLineDeleted += '<span class="line"><span class="line-number"><span class="old-line-number">' + edited + '</span></span><span>' + line + '</span></span>\n';
     }
     else if (line.startsWith('diff', 0)) {
 
