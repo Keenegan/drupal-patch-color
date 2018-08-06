@@ -10,7 +10,7 @@ pre {
 bloc {
     width: 50%;
     white-space: nowrap;
-    overflow: scroll;
+    overflow-x: auto;
 }
 
 blocMeta {
@@ -64,6 +64,9 @@ b {
     padding-left: 5px;
 }
 
-.empty-sign {
+.empty {
+    background-color: #d6d6d6;
     user-select: none;
+    height: 15px;
+    margin-left: 40px;
 }

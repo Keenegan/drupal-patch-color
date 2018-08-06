@@ -12,7 +12,6 @@ let codeStart = 'false';
 let newLineDeleted = '';
 let newLineAdded = '';
 let newLineMeta = '';
-let blocID = 0;
 
 arrayOfLines.forEach(function (line) {
 
@@ -49,11 +48,11 @@ arrayOfLines.forEach(function (line) {
     else if (codeStart === 'true' && line.startsWith('+', 0)) {
         initial++;
         newLineAdded += '<span class="line"><span class="line-number"><span class="new-line-number">' + initial + '</span></span><span class="plus">' + line + '</span></span>\n';
-        newLineDeleted += '<span class="line"><span class="empty-sign"></span></span></br>';
+        newLineDeleted += '<span class="empty line"></span>';
     }
     else if (codeStart === 'true' && line.startsWith('-', 0)) {
         edited++;
-        newLineAdded += '<span class="line"><span class="empty-sign"></span></span></br>';
+        newLineAdded += '<span class="empty line"></span>';
         newLineDeleted += '<span class="line"><span class="line-number"><span class="old-line-number">' + edited + '</span></span><span class="minus">' + line + '</span></span>\n';
     }
     else if (codeStart === 'true' && line.startsWith(' ', 0)) {
