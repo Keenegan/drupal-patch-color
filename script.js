@@ -99,3 +99,21 @@ function printCodeBlock() {
     document.getElementsByTagName("pre")[0].appendChild(bloc1);
     document.getElementsByTagName("pre")[0].appendChild(bloc2);
 }
+
+
+let derniere_position_de_scroll_connue = 0;
+let ticking = false;
+
+let test = document.getElementsByTagName("bloc");
+console.log(test);
+
+test.addEventListener('scroll', function(e) {
+    derniere_position_de_scroll_connue = window.scrollY;
+    if (!ticking) {
+        window.requestAnimationFrame(function() {
+            ticking = false;
+            console.log('toto');
+        });
+    }
+    ticking = true;
+});
