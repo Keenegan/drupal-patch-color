@@ -1,8 +1,10 @@
-﻿content = document.getElementsByTagName("pre")[0].innerHTML;
+﻿'use strict';
+
+let content = document.getElementsByTagName("pre")[0].innerHTML;
 
 document.getElementsByTagName("pre")[0].innerHTML = '';
 
-arrayOfLines = content.split("\n");
+let arrayOfLines = content.split("\n");
 
 let initial = 0;
 let initialLength = 0;
@@ -64,13 +66,13 @@ arrayOfLines.forEach(function (line) {
     else if (line.startsWith('diff', 0)) {
 
         // Regex that match a/... and b/...
-        regexAB = new RegExp("\^\([ab])\/\?");
+        let regexAB = new RegExp("\^\([ab])\/\?");
 
         let lineSplited = line.split(" ");
         lineSplited.forEach(function (word, index, arrayTest) {
             // Highlight filename
             if (regexAB.test(word) === true) {
-                wordSplited = word.split('/');
+                let wordSplited = word.split('/');
                 wordSplited[wordSplited.length - 1] = '<span class="filename">' + wordSplited[wordSplited.length - 1] + '</span></br>';
                 arrayTest[index] = '<b>' + wordSplited.join('/') + '</b>';
             }
