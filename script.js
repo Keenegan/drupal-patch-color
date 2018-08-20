@@ -94,26 +94,20 @@ printCodeBlock();
 function printCodeBlock() {
     let bloc1 = document.createElement('bloc');
     let bloc2 = document.createElement('bloc');
+    bloc1.className = 'left-bloc';
+    bloc2.className = 'right-bloc';
     bloc1.innerHTML = newLineDeleted;
     bloc2.innerHTML = newLineAdded;
     document.getElementsByTagName("pre")[0].appendChild(bloc1);
     document.getElementsByTagName("pre")[0].appendChild(bloc2);
 }
 
+var div = document.getElementsByTagName("bloc");
+div[0].addEventListener('scroll', OnOverflowChanged, false);
 
-let derniere_position_de_scroll_connue = 0;
-let ticking = false;
 
-let test = document.getElementsByTagName("bloc");
-console.log(test);
-
-test.addEventListener('scroll', function(e) {
-    derniere_position_de_scroll_connue = window.scrollY;
-    if (!ticking) {
-        window.requestAnimationFrame(function() {
-            ticking = false;
-            console.log('toto');
-        });
-    }
-    ticking = true;
-});
+function OnOverflowChanged(event) {
+    //Scroll info
+    console.log(event.target.scrollLeft);
+    //@TODO Bind scroll event to other bloc
+}
