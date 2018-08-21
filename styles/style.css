@@ -53,15 +53,12 @@ b {
 .line-number span {
     min-width: 30px;
     padding-right: 5px;
+    padding-left: 5px;
     text-align: center;
 }
 
 .new-line-number {
     padding-left: 0;
-}
-
-.old-line-number {
-    padding-left: 5px;
 }
 
 .empty {

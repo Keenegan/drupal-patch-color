@@ -98,16 +98,29 @@ function printCodeBlock() {
     bloc2.className = 'right-bloc';
     bloc1.innerHTML = newLineDeleted;
     bloc2.innerHTML = newLineAdded;
-    document.getElementsByTagName("pre")[0].appendChild(bloc1);
-    document.getElementsByTagName("pre")[0].appendChild(bloc2);
+
+    let pre = document.getElementsByTagName("pre")[0];
+    pre.appendChild(bloc1);
+    pre.appendChild(bloc2);
 }
 
-var div = document.getElementsByTagName("bloc");
-div[0].addEventListener('scroll', OnOverflowChanged, false);
+// Bind scroll event to every code bloc
+let blocs = document.getElementsByTagName('bloc');
+for (let i = 0; i < blocs.length; i++) {
+    blocs[i].addEventListener('scroll', scrollEvent, false);
+}
 
+// Change position of the other code bloc on horizontal scroll
+function scrollEvent(event) {
+    if (event.type === 'scroll') {
+        let scrollValue = event.target.scrollLeft;
+        let targetClass = event.target.className;
+        let otherDivClass = 'left-bloc';
+        if (targetClass === 'left-bloc') {
+            otherDivClass = 'right-bloc';
+        }
 
-function OnOverflowChanged(event) {
-    //Scroll info
-    console.log(event.target.scrollLeft);
-    //@TODO Bind scroll event to other bloc
+        let otherDiv = event.target.parentElement.getElementsByClassName(otherDivClass);
+        otherDiv[0].scrollLeft = scrollValue;
+    }
 }
