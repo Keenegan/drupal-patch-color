@@ -4,7 +4,17 @@ body {
 
 pre {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+bloc {
+    width: 50%;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+blocMeta {
+    width: 100%;
 }
 
 .plus {
@@ -28,30 +38,32 @@ b {
 .line {
     display: flex;
     flex-direction: row;
+
 }
 
 .line-number {
-    border-right: 1px solid #535A5F;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     display: flex;
     color: #24292e;
-    margin-right: 10px;
 }
 
 .line-number span {
     min-width: 30px;
     padding-right: 5px;
+    padding-left: 5px;
     text-align: center;
 }
 
 .new-line-number {
-    border-right: 1px solid #535A5F;
     padding-left: 0;
 }
 
-.old-line-number {
-    padding-left: 5px;
+.empty {
+    background-color: #d6d6d6;
+    user-select: none;
+    height: 15px;
+    margin-left: 40px;
 }
