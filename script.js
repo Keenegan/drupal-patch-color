@@ -70,24 +70,8 @@ arrayOfLines.forEach(function (line) {
         edited++;
     }
     else if (line.startsWith('diff', 0)) {
-
-        // Regex that match a/... and b/...
-        let regexAB = new RegExp("\^\([ab])\/\?");
-
-        let lineSplited = line.split(" ");
-        lineSplited.forEach(function (word, index, arrayTest) {
-            // Highlight filename
-            if (regexAB.test(word) === true) {
-                let wordSplited = word.split('/');
-                wordSplited[wordSplited.length - 1] = '<span class="filename">' + wordSplited[wordSplited.length - 1] + '</span></br>';
-                arrayTest[index] = '<b>' + wordSplited.join('/') + '</b>';
-            }
-            else {
-                arrayTest[index] = word;
-            }
-        });
-
-        newLineMeta += lineSplited.join(' ') + '\n';
+        line = colorFileName(line);
+        newLineMeta += line;
     }
     else {
         newLineMeta += line + '\n';
@@ -95,6 +79,26 @@ arrayOfLines.forEach(function (line) {
 
 });
 printCodeBlock();
+
+function colorFileName(line) {
+    // Regex that match a/... and b/...
+    let regexAB = new RegExp("\^\([ab])\/\?");
+
+    let lineSplited = line.split(" ");
+    lineSplited.forEach(function (word, index, currentArray) {
+        // Highlight filename
+        if (regexAB.test(word) === true) {
+            let wordSplited = word.split('/');
+            wordSplited[wordSplited.length - 1] = '<span class="filename">' + wordSplited[wordSplited.length - 1] + '</span>';
+            currentArray[index] = '<b>' + wordSplited.join('/') + '</b>';
+        }
+        else {
+            currentArray[index] = word;
+        }
+    });
+
+    return lineSplited + '\n';
+}
 
 
 function printCodeBlock() {
