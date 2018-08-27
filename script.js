@@ -14,6 +14,8 @@ let codeStart = 'false';
 let newLineDeleted = '';
 let newLineAdded = '';
 let newLineMeta = '';
+let linesNumberAdded = '';
+let linesNumberDeleted = '';
 
 arrayOfLines.forEach(function (line) {
 
@@ -35,6 +37,8 @@ arrayOfLines.forEach(function (line) {
                 printCodeBlock();
                 newLineDeleted = '';
                 newLineAdded = '';
+                linesNumberAdded = '';
+                linesNumberDeleted = '';
             }
 
             let textnode = document.createElement('blocMeta');
@@ -48,20 +52,22 @@ arrayOfLines.forEach(function (line) {
         newLineMeta += line + '</br>';
     }
     else if (codeStart === 'true' && line.startsWith('+', 0)) {
+        newLineAdded += '<span class="line"><span class="plus">' + line + '</span></span>\n';
+        linesNumberAdded += '<span>' + initial + '</span>';
         initial++;
-        newLineAdded += '<span class="line"><span class="line-number"><span class="new-line-number">' + initial + '</span></span><span class="plus">' + line + '</span></span>\n';
-        newLineDeleted += '<span class="empty line"></span>';
     }
     else if (codeStart === 'true' && line.startsWith('-', 0)) {
+        newLineDeleted += '<span class="line"><span class="minus">' + line + '</span></span>\n';
+        linesNumberDeleted += '<span>' + edited + '</span>';
         edited++;
-        newLineAdded += '<span class="empty line"></span>';
-        newLineDeleted += '<span class="line"><span class="line-number"><span class="old-line-number">' + edited + '</span></span><span class="minus">' + line + '</span></span>\n';
     }
     else if (codeStart === 'true' && line.startsWith(' ', 0)) {
+        linesNumberAdded += '<span>' + initial + '</span>';
+        linesNumberDeleted += '<span>' + edited + '</span>';
+        newLineAdded += '<span class="line"><span>' + line + '</span></span>\n';
+        newLineDeleted += '<span class="line"><span>' + line + '</span></span>\n';
         initial++;
         edited++;
-        newLineAdded += '<span class="line"><span class="line-number"><span class="new-line-number">' + initial + '</span></span><span>' + line + '</span></span>\n';
-        newLineDeleted += '<span class="line"><span class="line-number"><span class="old-line-number">' + edited + '</span></span><span>' + line + '</span></span>\n';
     }
     else if (line.startsWith('diff', 0)) {
 
@@ -93,15 +99,26 @@ printCodeBlock();
 
 function printCodeBlock() {
     let bloc1 = document.createElement('bloc');
+    let linesBloc = document.createElement('line-bloc');
     let bloc2 = document.createElement('bloc');
+    let codeBloc = document.createElement('codeBloc');
+    let linesAdd = document.createElement('add');
+    let linesDel = document.createElement('delete');
+
     bloc1.className = 'left-bloc';
     bloc2.className = 'right-bloc';
     bloc1.innerHTML = newLineDeleted;
     bloc2.innerHTML = newLineAdded;
+    linesAdd.innerHTML = linesNumberAdded;
+    linesDel.innerHTML = linesNumberDeleted;
 
     let pre = document.getElementsByTagName("pre")[0];
-    pre.appendChild(bloc1);
-    pre.appendChild(bloc2);
+    pre.appendChild(codeBloc);
+    codeBloc.appendChild(bloc1);
+    codeBloc.appendChild(linesBloc);
+    linesBloc.appendChild(linesDel);
+    linesBloc.appendChild(linesAdd);
+    codeBloc.appendChild(bloc2);
 }
 
 // Bind scroll event to every code bloc

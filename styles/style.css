@@ -2,15 +2,37 @@ body {
     color: #0F151F;
 }
 
-pre {
+codebloc {
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
 }
 
 bloc {
-    width: 50%;
+    flex: 1;
     white-space: nowrap;
     overflow-x: auto;
+}
+
+line-bloc {
+    display: flex;
+}
+
+line-bloc span {
+    min-width: 30px;
+    padding-right: 5px;
+    padding-left: 5px;
+    text-align: center;
+}
+
+add {
+    display: flex;
+    flex-direction: column;
+}
+
+delete {
+    display: flex;
+    flex-direction: column;
 }
 
 blocMeta {
@@ -38,7 +60,7 @@ b {
 .line {
     display: flex;
     flex-direction: row;
-
+    white-space: pre;
 }
 
 .line-number {
@@ -50,20 +72,6 @@ b {
     color: #24292e;
 }
 
-.line-number span {
-    min-width: 30px;
-    padding-right: 5px;
-    padding-left: 5px;
-    text-align: center;
-}
-
 .new-line-number {
     padding-left: 0;
-}
-
-.empty {
-    background-color: #d6d6d6;
-    user-select: none;
-    height: 15px;
-    margin-left: 40px;
 }
