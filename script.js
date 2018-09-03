@@ -157,6 +157,15 @@ function colorFileName(line) {
 
 function printCodeBlock() {
 
+    let pre = document.getElementsByTagName("pre")[0];
+
+    // Print file's info if there is any
+    if (fileInfoLines !== '') {
+        let BlocFileInfo = document.createElement('bloc');
+        BlocFileInfo.innerHTML = fileInfoLines;
+        pre.appendChild(BlocFileInfo);
+    }
+
     diffsArrays.forEach(function (diff) {
 
         let blocMeta = document.createElement('blocMeta');
@@ -178,7 +187,6 @@ function printCodeBlock() {
         linesAdd.innerHTML = diff.newCodeLineNumber;
         linesDel.innerHTML = diff.oldCodeLineNumber;
 
-        let pre = document.getElementsByTagName("pre")[0];
         pre.appendChild(blocMeta);
         pre.appendChild(codeBloc);
 

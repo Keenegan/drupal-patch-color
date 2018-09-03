@@ -1,11 +1,19 @@
 body {
     color: #0F151F;
+    font-family: sans-serif;
+    font-size: 12px;
 }
 
 codebloc {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    margin-bottom: 15px;
+    color: #20242f;
+}
+
+.left-bloc {
+    background-color: #d9edf7;
 }
 
 bloc {
@@ -16,12 +24,16 @@ bloc {
 
 line-bloc {
     display: flex;
+    background-color: #f6f6f6;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    color: #878787;
+    padding: 0 15px;
+
 }
 
 line-bloc span {
     min-width: 30px;
-    padding-right: 5px;
-    padding-left: 5px;
     text-align: center;
 }
 
