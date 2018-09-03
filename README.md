@@ -6,6 +6,7 @@ Web extension that adds color to patch files on https://www.drupal.org/
 
 
 ## Features 
+### Sync scrolling
 ![alt tag](https://image.ibb.co/byZcCz/ezgif_com_optimize.gif "Sync-scrolling")
 
 You can download it here:
