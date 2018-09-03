@@ -13,17 +13,16 @@ let editedLength = 0;
 
 let newLineDeleted = '';
 let newLineAdded = '';
-let newLineMeta = '';
+let diffInfoLines = '';
 let linesNumberAdded = '';
 let linesNumberDeleted = '';
+
+let fileInfoLines = '';
 
 // [meta, oldCode, oldCodeLineNumber, newCodeLineNumber, newCode]
 let diffsArrays = [];
 
 class Diff {
-    constructor(meta) {
-        this.meta = meta;
-    }
 
     print() {
         console.log(this.meta);
@@ -33,20 +32,23 @@ class Diff {
         console.log(this.newCodeLineNumber);
     }
 }
+// Extract optional file's metadata.
+// @TODO Handle display of fileInfoLines.
+extractFileInfo();
 
 lines.forEach(function (line) {
 
     if (line.startsWith('@@ ', 0)) {
-
         fillCode();
 
         let lineSplited = line.split(' ');
 
-        newLineMeta += line + '</br>';
-        let diff = new Diff(newLineMeta);
-        diffsArrays.push(diff);
+        diffInfoLines += line + '</br>';
 
-        newLineMeta = '';
+        let diff = new Diff();
+        diff.meta = diffInfoLines;
+        diffsArrays.push(diff);
+        diffInfoLines = '';
 
         initial = lineSplited[1].split(',');
         initialLength = initial[1];
@@ -58,7 +60,7 @@ lines.forEach(function (line) {
 
     }
     else if (line.startsWith('+++ ', 0) || line.startsWith('--- ', 0)) {
-        newLineMeta += line + '</br>';
+        diffInfoLines += line + '</br>';
     }
     else if (line.startsWith('+', 0)) {
         newLineAdded += '<span class="line"><span class="plus">' + line + '</span></span>\n';
@@ -80,10 +82,10 @@ lines.forEach(function (line) {
     }
     else if (line.startsWith('diff', 0)) {
         line = colorFileName(line);
-        newLineMeta += line;
+        diffInfoLines += line;
     }
     else {
-        newLineMeta += line + '</br>';
+        diffInfoLines += line + '</br>';
     }
 
 });
@@ -91,8 +93,10 @@ lines.forEach(function (line) {
 fillCode();
 printCodeBlock();
 
-function fillCode () {
+function fillCode() {
+
     if (newLineAdded !== '' || newLineDeleted !== '') {
+
         let diff = diffsArrays[diffsArrays.length - 1];
         diff.oldCode = newLineDeleted;
         diff.oldCodeLineNumber = linesNumberDeleted;
@@ -103,6 +107,30 @@ function fillCode () {
         linesNumberDeleted = '';
         linesNumberAdded = '';
         newLineAdded = '';
+    }
+}
+
+/**
+ *
+ * Check if there is metadata at the head of the file, add them to the fileInfoLines var
+ * and remove them from lines array. They start with a blank space.
+ * Ex :  .../media_wysiwyg/includes/media_wysiwyg.filter.inc |  4 ++++
+ *       modules/media_wysiwyg/media_wysiwyg.module          | 21 +++++++++++++++++++++
+ *       2 files changed, 25 insertions(+)
+ * Ex: https://www.drupal.org/files/issues/2018-05-04/media-2967590-php-mbstring-extension-check-2.patch
+ */
+function extractFileInfo() {
+    if (lines[0].startsWith(' ', 0)) {
+        let i = 0;
+        for (i; i < lines.length; i++) {
+            if (lines[i].startsWith('diff ', 0)) {
+                break;
+            }
+            else {
+                fileInfoLines += lines[i] + '<br>';
+            }
+        }
+        lines.splice(0, i);
     }
 }
 
