@@ -2,7 +2,12 @@
 
 Web extension that adds color to patch files on https://www.drupal.org/
 
-![alt tag](https://image.ibb.co/iaeabd/Capture.png "Coloration example")
+![alt tag](https://image.ibb.co/h0w2ee/preview.png "Preview")
+
+
+## Features 
+### Sync scrolling
+![alt tag](https://image.ibb.co/byZcCz/ezgif_com_optimize.gif "Sync-scrolling")
 
 You can download it here:
 https://chrome.google.com/webstore/detail/drupal-patch-color/acnjdilmnleddbcipfcfbbmhlialepcd
