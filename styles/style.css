@@ -20,6 +20,8 @@ bloc {
     flex: 1;
     white-space: nowrap;
     overflow-x: auto;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 line-bloc {
