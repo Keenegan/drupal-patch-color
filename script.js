@@ -23,17 +23,56 @@ let fileInfoLines = '';
 let diffsArrays = [];
 
 class Diff {
-
-    print() {
+    // Print the variables in the console
+    debug() {
         console.log(this.meta);
         console.log(this.oldCode);
         console.log(this.newCode);
         console.log(this.oldCodeLineNumber);
         console.log(this.newCodeLineNumber);
     }
+
+    // Print the diff into an HTMLElement
+    print(HtmlElement) {
+
+        let blocMeta = document.createElement('blocMeta');
+        let bloc2 = document.createElement('bloc');
+        let linesBloc = document.createElement('line-bloc');
+
+        let codeBloc = document.createElement('codeBloc');
+        let linesAdd = document.createElement('add');
+        let linesDel = document.createElement('delete');
+
+        // If this is a new file, don't print the "old code" bloc
+        if (this.oldCode !== '') {
+            let bloc1 = document.createElement('bloc');
+            bloc1.className = 'left-bloc';
+            bloc1.innerHTML = this.oldCode;
+            codeBloc.appendChild(bloc1);
+            // Bind scroll event on both code blocs
+            bloc1.addEventListener('scroll', scrollEvent, false);
+            bloc2.addEventListener('scroll', scrollEvent, false);
+        }
+
+        bloc2.className = 'right-bloc';
+        blocMeta.className = 'meta';
+
+        blocMeta.innerHTML = this.meta;
+
+        bloc2.innerHTML = this.newCode;
+        linesAdd.innerHTML = this.newCodeLineNumber;
+        linesDel.innerHTML = this.oldCodeLineNumber;
+
+        codeBloc.appendChild(linesBloc);
+        linesBloc.appendChild(linesDel);
+        linesBloc.appendChild(linesAdd);
+        codeBloc.appendChild(bloc2);
+
+        HtmlElement.appendChild(blocMeta);
+        HtmlElement.appendChild(codeBloc);
+    }
 }
 // Extract optional file's metadata.
-// @TODO Handle display of fileInfoLines.
 extractFileInfo();
 
 lines.forEach(function (line) {
@@ -122,6 +161,7 @@ function fillCode() {
 function extractFileInfo() {
     if (lines[0].startsWith(' ', 0)) {
         let i = 0;
+        // Parse the lines array, stop when the metadata start (when the line starts with a 'diff')
         for (i; i < lines.length; i++) {
             if (lines[i].startsWith('diff ', 0)) {
                 break;
@@ -130,6 +170,7 @@ function extractFileInfo() {
                 fileInfoLines += lines[i] + '<br>';
             }
         }
+        // Remove the file info from the lines array
         lines.splice(0, i);
     }
 }
@@ -154,7 +195,6 @@ function colorFileName(line) {
     return lineSplited + '\n';
 }
 
-
 function printCodeBlock() {
 
     let pre = document.getElementsByTagName("pre")[0];
@@ -166,44 +206,12 @@ function printCodeBlock() {
         pre.appendChild(BlocFileInfo);
     }
 
+    // Print the metadata and the code of the diff
     diffsArrays.forEach(function (diff) {
-
-        let blocMeta = document.createElement('blocMeta');
-        let bloc1 = document.createElement('bloc');
-        let bloc2 = document.createElement('bloc');
-        let linesBloc = document.createElement('line-bloc');
-
-        let codeBloc = document.createElement('codeBloc');
-        let linesAdd = document.createElement('add');
-        let linesDel = document.createElement('delete');
-
-        bloc1.className = 'left-bloc';
-        bloc2.className = 'right-bloc';
-        blocMeta.className = 'meta';
-
-        blocMeta.innerHTML = diff.meta;
-        bloc1.innerHTML = diff.oldCode;
-        bloc2.innerHTML = diff.newCode;
-        linesAdd.innerHTML = diff.newCodeLineNumber;
-        linesDel.innerHTML = diff.oldCodeLineNumber;
-
-        pre.appendChild(blocMeta);
-        pre.appendChild(codeBloc);
-
-        codeBloc.appendChild(bloc1);
-        codeBloc.appendChild(linesBloc);
-        linesBloc.appendChild(linesDel);
-        linesBloc.appendChild(linesAdd);
-        codeBloc.appendChild(bloc2);
+        diff.print(pre);
     });
 
 
-}
-
-// Bind scroll event to every code bloc
-let blocs = document.getElementsByTagName('bloc');
-for (let i = 0; i < blocs.length; i++) {
-    blocs[i].addEventListener('scroll', scrollEvent, false);
 }
 
 // Change position of the other code bloc on horizontal scroll
