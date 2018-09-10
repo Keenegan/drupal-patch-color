@@ -17,9 +17,17 @@ let diffInfoLines = '';
 let linesNumberAdded = '';
 let linesNumberDeleted = '';
 
+/**
+ * Contains general informations about the patch file
+ * Ex : how many lines are added, deleted, ect..
+ * @type {string}
+ */
 let fileInfoLines = '';
 
-// [meta, oldCode, oldCodeLineNumber, newCodeLineNumber, newCode]
+/**
+ * An array of Diff objects
+ * @type {Array}
+ */
 let diffsArrays = [];
 
 class Diff {
@@ -72,13 +80,14 @@ class Diff {
         HtmlElement.appendChild(codeBloc);
     }
 }
+
 // Extract optional file's metadata.
 extractFileInfo();
 
 lines.forEach(function (line) {
 
     if (line.startsWith('@@ ', 0)) {
-        fillCode();
+        updateLastDiff();
 
         let lineSplited = line.split(' ');
 
@@ -129,19 +138,27 @@ lines.forEach(function (line) {
 
 });
 
-fillCode();
+// Update the last diff of the diffArray
+updateLastDiff();
+
+// Print the whole diffArray
 printCodeBlock();
 
-function fillCode() {
-
+/**
+ * Add code to the last diff object of the diffArray.
+ */
+function updateLastDiff() {
+    // Check if there is new code to add on the diff object.
     if (newLineAdded !== '' || newLineDeleted !== '') {
 
+        // Get the last diff of the array
         let diff = diffsArrays[diffsArrays.length - 1];
         diff.oldCode = newLineDeleted;
         diff.oldCodeLineNumber = linesNumberDeleted;
         diff.newCodeLineNumber = linesNumberAdded;
         diff.newCode = newLineAdded;
 
+        // Reset the temporary code variables .
         newLineDeleted = '';
         linesNumberDeleted = '';
         linesNumberAdded = '';
@@ -195,6 +212,9 @@ function colorFileName(line) {
     return lineSplited + '\n';
 }
 
+/**
+ * Print the whole diffArray and metadatas.
+ */
 function printCodeBlock() {
 
     let pre = document.getElementsByTagName("pre")[0];
