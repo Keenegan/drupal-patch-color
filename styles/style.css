@@ -89,3 +89,32 @@ b {
 .new-line-number {
     padding-left: 0;
 }
+
+/***********************************************************
+INTRO BLOCK
+***********************************************************/
+
+blockIntro {
+    display: block;
+    background-color: #f6f6f6;
+    padding: 5px;
+}
+
+blockIntro p {
+    margin: 0;
+}
+
+blockIntro .changed-files {
+    font-weight: bold;
+    color: #6592f7;
+}
+
+blockIntro .additions {
+    font-weight: bold;
+    color: rgb(102, 187, 106);
+}
+
+blockIntro .deletions {
+    font-weight: bold;
+    color: rgb(211, 47, 47);
+}
