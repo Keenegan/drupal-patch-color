@@ -13,7 +13,7 @@
         "*://*.drupal.org/*.patch"
       ],
       "js": [
-        "script.js"
+        "scripts/script.js"
       ],
       "css": [
         "styles/style.css"
