@@ -17,6 +17,10 @@ let diffInfoLines = '';
 let linesNumberAdded = '';
 let linesNumberDeleted = '';
 
+let numberOfChangedFiles = 0;
+let numberOfAdditions = 0;
+let numberOfDeletions = 0;
+
 /**
  * Contains general informations about the patch file
  * Ex : how many lines are added, deleted, ect..
@@ -114,11 +118,13 @@ lines.forEach(function (line) {
         newLineAdded += '<span class="line"><span class="plus">' + line + '</span></span>\n';
         linesNumberAdded += '<span>' + initial + '</span>';
         initial++;
+        numberOfAdditions++;
     }
     else if (line.startsWith('-', 0)) {
         newLineDeleted += '<span class="line"><span class="minus">' + line + '</span></span>\n';
         linesNumberDeleted += '<span>' + edited + '</span>';
         edited++;
+        numberOfDeletions++;
     }
     else if (line.startsWith(' ', 0)) {
         linesNumberAdded += '<span>' + initial + '</span>';
@@ -131,6 +137,7 @@ lines.forEach(function (line) {
     else if (line.startsWith('diff', 0)) {
         line = colorFileName(line);
         diffInfoLines += line;
+        numberOfChangedFiles++;
     }
     else {
         diffInfoLines += line + '</br>';
@@ -247,4 +254,37 @@ function scrollEvent(event) {
         let otherDiv = event.target.parentElement.getElementsByClassName(otherDivClass);
         otherDiv[0].scrollLeft = scrollValue;
     }
+}
+
+// Print introduction block
+printIntroBlock();
+
+/**
+ * Print introduction block containing info about number of changed files, additions, and deletions
+ */
+function printIntroBlock() {
+
+    let blockIntro = document.createElement('blockIntro');
+
+    // Set text for changed files
+    let changedFilesText = numberOfChangedFiles + " changed file";
+    if (numberOfChangedFiles > 1) {
+        changedFilesText += "s"
+    }
+
+    // Set text for additions
+    let additionsText = numberOfAdditions + " addition";
+    if (numberOfAdditions > 1) {
+        additionsText += "s"
+    }
+
+    // Set text for deletions
+    let deletionsText = numberOfDeletions + " deletion";
+    if (numberOfDeletions > 1) {
+        deletionsText += "s"
+    }
+
+    // Print the block
+    blockIntro.innerHTML = "<p>Showing <span class='changed-files'>" + changedFilesText + "</span> with <span class='additions'>" + additionsText + "</span> and <span class='deletions'>" + deletionsText + "</span></p>";
+    document.body.insertBefore(blockIntro, document.body.firstChild);
 }
