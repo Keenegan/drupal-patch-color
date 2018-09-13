@@ -264,27 +264,23 @@ printIntroBlock();
  */
 function printIntroBlock() {
 
+    if (fileInfoLines !== '') {
+        return
+    }
+
     let blockIntro = document.createElement('blockIntro');
 
     // Set text for changed files
-    let changedFilesText = numberOfChangedFiles + " changed file";
-    if (numberOfChangedFiles > 1) {
-        changedFilesText += "s"
-    }
+    let changedFilesText = numberOfChangedFiles + ' ' + (numberOfChangedFiles > 1 ? 'files' : 'file') + '  changed';
 
     // Set text for additions
-    let additionsText = numberOfAdditions + " addition";
-    if (numberOfAdditions > 1) {
-        additionsText += "s"
-    }
+    let additionsText = numberOfAdditions + ' ' + (numberOfAdditions > 1 ? 'insertions' : 'insertion') + '(+)';
 
     // Set text for deletions
-    let deletionsText = numberOfDeletions + " deletion";
-    if (numberOfDeletions > 1) {
-        deletionsText += "s"
-    }
+    let deletionsText = numberOfDeletions + ' ' + (numberOfAdditions > 1 ? 'deletions' : 'deletion') + '(-)';
 
     // Print the block
-    blockIntro.innerHTML = "<p>Showing <span class='changed-files'>" + changedFilesText + "</span> with <span class='additions'>" + additionsText + "</span> and <span class='deletions'>" + deletionsText + "</span></p>";
+    blockIntro.innerHTML = "<p><span class='changed-files'>" + changedFilesText + "</span>, " +
+        "<span class='additions'>" + additionsText + "</span> <span class='deletions'>" + deletionsText + "</span></p>";
     document.body.insertBefore(blockIntro, document.body.firstChild);
 }
