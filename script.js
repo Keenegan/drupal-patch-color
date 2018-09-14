@@ -69,7 +69,7 @@ class Diff {
         bloc2.className = 'right-bloc';
         blocMeta.className = 'meta';
 
-        blocMeta.innerHTML = this.meta;
+        blocMeta.innerHTML = '<p>' + this.meta + '</p>';
 
         bloc2.innerHTML = this.newCode;
         linesAdd.innerHTML = this.newCodeLineNumber;
@@ -209,7 +209,7 @@ function colorFileName(line) {
         if (regexAB.test(word) === true) {
             let wordSplited = word.split('/');
             wordSplited[wordSplited.length - 1] = '<span class="filename">' + wordSplited[wordSplited.length - 1] + '</span>';
-            currentArray[index] = '<b>' + wordSplited.join('/') + '</b>';
+            currentArray[index] = wordSplited.join('/');
         }
         else {
             currentArray[index] = word;
