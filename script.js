@@ -216,7 +216,7 @@ function colorFileName(line) {
         }
     });
 
-    return lineSplited + '\n';
+    return lineSplited.join(' ') + '\n';
 }
 
 /**
