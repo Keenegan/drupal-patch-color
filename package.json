@@ -1,6 +1,6 @@
 {
   "name": "drupal-patch-color",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Add coloration for drupal.org patchs",
   "main": "script.js",
   "scripts": {
