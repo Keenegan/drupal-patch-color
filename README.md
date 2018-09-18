@@ -2,7 +2,7 @@
 
 Web extension that adds color to patch files on https://www.drupal.org/
 
-![alt tag](https://image.ibb.co/h0w2ee/preview.png "Preview")
+![alt tag](https://image.ibb.co/mvWpsK/Capture.png "Preview")
 
 
 ## Features 
