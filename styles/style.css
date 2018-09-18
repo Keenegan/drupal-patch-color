@@ -30,7 +30,7 @@ line-bloc {
     border-left: 1px solid black;
     border-right: 1px solid black;
     color: #878787;
-    padding: 0 15px;
+    padding: 0 10px;
 
 }
 
@@ -51,6 +51,12 @@ delete {
 
 blocMeta {
     width: 100%;
+}
+blocMeta p{
+    width: 100%;
+    background-color: #f6f6f6;
+    margin-bottom: 0;
+    padding-bottom: 14px;
 }
 
 .plus {
@@ -88,4 +94,26 @@ b {
 
 .new-line-number {
     padding-left: 0;
+}
+
+/***********************************************************
+INTRO BLOCK
+***********************************************************/
+
+blockIntro {
+    display: block;
+    background-color: #f6f6f6;
+    padding: 5px;
+}
+
+blockIntro p {
+    margin: 0;
+}
+
+blockIntro .additions {
+    color: rgb(71, 138, 75);
+}
+
+blockIntro .deletions {
+    color: rgb(211, 47, 47);
 }

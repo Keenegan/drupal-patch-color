@@ -17,6 +17,10 @@ let diffInfoLines = '';
 let linesNumberAdded = '';
 let linesNumberDeleted = '';
 
+let numberOfChangedFiles = 0;
+let numberOfAdditions = 0;
+let numberOfDeletions = 0;
+
 /**
  * Contains general informations about the patch file
  * Ex : how many lines are added, deleted, ect..
@@ -65,7 +69,7 @@ class Diff {
         bloc2.className = 'right-bloc';
         blocMeta.className = 'meta';
 
-        blocMeta.innerHTML = this.meta;
+        blocMeta.innerHTML = '<p>' + this.meta + '</p>';
 
         bloc2.innerHTML = this.newCode;
         linesAdd.innerHTML = this.newCodeLineNumber;
@@ -116,11 +120,13 @@ lines.forEach(function (line) {
         newLineAdded += '<span class="line"><span class="plus">' + line + '</span></span>\n';
         linesNumberAdded += '<span>' + initial + '</span>';
         initial++;
+        numberOfAdditions++;
     }
     else if (line.startsWith('-', 0)) {
         newLineDeleted += '<span class="line"><span class="minus">' + line + '</span></span>\n';
         linesNumberDeleted += '<span>' + edited + '</span>';
         edited++;
+        numberOfDeletions++;
     }
     else if (line.startsWith(' ', 0)) {
         linesNumberAdded += '<span>' + initial + '</span>';
@@ -133,6 +139,7 @@ lines.forEach(function (line) {
     else if (line.startsWith('diff', 0)) {
         line = colorFileName(line);
         diffInfoLines += line;
+        numberOfChangedFiles++;
     }
     else {
         diffInfoLines += line + '</br>';
@@ -204,14 +211,14 @@ function colorFileName(line) {
         if (regexAB.test(word) === true) {
             let wordSplited = word.split('/');
             wordSplited[wordSplited.length - 1] = '<span class="filename">' + wordSplited[wordSplited.length - 1] + '</span>';
-            currentArray[index] = '<b>' + wordSplited.join('/') + '</b>';
+            currentArray[index] = wordSplited.join('/');
         }
         else {
             currentArray[index] = word;
         }
     });
 
-    return lineSplited + '\n';
+    return lineSplited.join(' ') + '\n';
 }
 
 /**
@@ -249,4 +256,33 @@ function scrollEvent(event) {
         let otherDiv = event.target.parentElement.getElementsByClassName(otherDivClass);
         otherDiv[0].scrollLeft = scrollValue;
     }
+}
+
+// Print introduction block
+printIntroBlock();
+
+/**
+ * Print introduction block containing info about number of changed files, additions, and deletions
+ */
+function printIntroBlock() {
+
+    if (fileInfoLines !== '') {
+        return
+    }
+
+    let blockIntro = document.createElement('blockIntro');
+
+    // Set text for changed files
+    let changedFilesText = numberOfChangedFiles + ' ' + (numberOfChangedFiles > 1 ? 'files' : 'file') + '  changed';
+
+    // Set text for additions
+    let additionsText = numberOfAdditions + ' ' + (numberOfAdditions > 1 ? 'insertions' : 'insertion') + '(+)';
+
+    // Set text for deletions
+    let deletionsText = numberOfDeletions + ' ' + (numberOfAdditions > 1 ? 'deletions' : 'deletion') + '(-)';
+
+    // Print the block
+    blockIntro.innerHTML = "<p><span class='changed-files'>" + changedFilesText + "</span>, " +
+        "<span class='additions'>" + additionsText + "</span> <span class='deletions'>" + deletionsText + "</span></p>";
+    document.body.insertBefore(blockIntro, document.body.firstChild);
 }
