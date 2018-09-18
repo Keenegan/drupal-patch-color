@@ -83,6 +83,8 @@ class Diff {
         HtmlElement.appendChild(blocMeta);
         HtmlElement.appendChild(codeBloc);
     }
+
+    //@TODO Add function print side by side and print inline
 }
 
 // Extract optional file's metadata.
