@@ -1,7 +1,8 @@
-body {
+body{
     color: #0F151F;
     font-family: sans-serif;
     font-size: 12px;
+    padding-top: 30px;
 }
 
 codebloc {
@@ -97,23 +98,96 @@ b {
 }
 
 /***********************************************************
-INTRO BLOCK
+BUTTONS
 ***********************************************************/
 
-blockIntro {
-    display: block;
+button {
+    position: relative;
+    display: inline-block;
+    padding: 6px 12px;
+    font-weight: 600;
+    line-height: 20px;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-repeat: repeat-x;
+    background-position: -1px -1px;
+    background-size: 110% 110%;
+    border: 1px solid rgba(27,31,35,0.2);
+    border-top-color: rgba(27, 31, 35, 0.2);
+    border-right-color: rgba(27, 31, 35, 0.2);
+    border-right-width: 1px;
+    border-bottom-color: rgba(27, 31, 35, 0.2);
+    border-left-color: rgba(27, 31, 35, 0.2);
+    border-radius: 0.25em;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+button:hover {
+    background-color: #fff;
+    background-image: linear-gradient(-180deg,#f0f3f6 0%,#e6ebf1 90%);
+    background-position: -0.5em;
+    border-color: rgba(27,31,35,0.35);
+}
+
+button:active,
+button.selected {
+    background-color: #e9ecef;
+    background-image: none;
+    border-color: rgba(27,31,35,0.35);
+    box-shadow: inset 0 0.15em 0.3em rgba(27,31,35,0.15);
+}
+
+/***********************************************************
+HEADER
+***********************************************************/
+
+header {
+    position: fixed;
     background-color: #f6f6f6;
-    padding: 5px;
+    display: block;
+    left: 0;
+    right: 0;
+    top: 0;
 }
 
-blockIntro p {
-    margin: 0;
+.view-mode {
+    float: right;
+    margin: 5px;
 }
 
-blockIntro .additions {
+.view-mode button {
+    border-radius: 0;
+}
+
+.view-mode button:first-child {
+    border-right: 0 none;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.view-mode button:last-child {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.file-info {
+    float: left;
+    display: block;
+    padding: 10px 0 10px 5px;
+    height: auto;
+}
+
+.file-info .additions {
     color: rgb(71, 138, 75);
 }
 
-blockIntro .deletions {
+.file-info .deletions {
     color: rgb(211, 47, 47);
 }
