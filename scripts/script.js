@@ -10,7 +10,7 @@ let initial = 0;
 let initialLength = 0;
 let edited = 0;
 let editedLength = 0;
-let codeStarted = FALSE;
+let codeStarted = false;
 
 let newLineDeleted = '';
 let newLineAdded = '';
@@ -94,7 +94,7 @@ extractFileInfo();
 lines.forEach(function (line) {
 
     if (line.startsWith('@@ ', 0)) {
-        codeStarted = TRUE;
+        codeStarted = true;
         updateLastDiff();
 
         let lineSplited = line.split(' ');
@@ -114,7 +114,7 @@ lines.forEach(function (line) {
         editedLength = edited[1];
         edited = edited[0].replace('+', '');
 
-    } else if (codeStarted === FALSE) {
+    } else if (codeStarted === false) {
         diffInfoLines += line + '</br>';
     } else if (line.startsWith('+++ ', 0) || line.startsWith('--- ', 0)) {
         diffInfoLines += line + '</br>';
