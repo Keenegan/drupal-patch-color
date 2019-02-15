@@ -10,6 +10,7 @@ let initial = 0;
 let initialLength = 0;
 let edited = 0;
 let editedLength = 0;
+let codeStarted = FALSE;
 
 let newLineDeleted = '';
 let newLineAdded = '';
@@ -93,6 +94,7 @@ extractFileInfo();
 lines.forEach(function (line) {
 
     if (line.startsWith('@@ ', 0)) {
+        codeStarted = TRUE;
         updateLastDiff();
 
         let lineSplited = line.split(' ');
@@ -112,39 +114,34 @@ lines.forEach(function (line) {
         editedLength = edited[1];
         edited = edited[0].replace('+', '');
 
-    }
-    else if (line.startsWith('+++ ', 0) || line.startsWith('--- ', 0)) {
+    } else if (codeStarted === FALSE) {
         diffInfoLines += line + '</br>';
-    }
-    else if (line.startsWith('+', 0)) {
+    } else if (line.startsWith('+++ ', 0) || line.startsWith('--- ', 0)) {
+        diffInfoLines += line + '</br>';
+    } else if (line.startsWith('+', 0)) {
         newLineAdded += '<span class="line"><span class="plus">' + line + '</span></span>\n';
         linesNumberAdded += '<span>' + initial + '</span>';
         initial++;
         numberOfAdditions++;
-    }
-    else if (line.startsWith('-', 0)) {
+    } else if (line.startsWith('-', 0)) {
         newLineDeleted += '<span class="line"><span class="minus">' + line + '</span></span>\n';
         linesNumberDeleted += '<span>' + edited + '</span>';
         edited++;
         numberOfDeletions++;
-    }
-    else if (line.startsWith(' ', 0)) {
+    } else if (line.startsWith(' ', 0)) {
         linesNumberAdded += '<span>' + initial + '</span>';
         linesNumberDeleted += '<span>' + edited + '</span>';
         newLineAdded += '<span class="line"><span>' + line + '</span></span>\n';
         newLineDeleted += '<span class="line"><span>' + line + '</span></span>\n';
         initial++;
         edited++;
-    }
-    else if (line.startsWith('diff', 0)) {
+    } else if (line.startsWith('diff', 0)) {
         line = colorFileName(line);
         diffInfoLines += line;
         numberOfChangedFiles++;
-    }
-    else {
+    } else {
         diffInfoLines += line + '</br>';
     }
-
 });
 
 // Update the last diff of the diffArray
@@ -191,8 +188,7 @@ function extractFileInfo() {
         for (i; i < lines.length; i++) {
             if (lines[i].startsWith('diff ', 0)) {
                 break;
-            }
-            else {
+            } else {
                 fileInfoLines += lines[i] + '<br>';
             }
         }
@@ -212,8 +208,7 @@ function colorFileName(line) {
             let wordSplited = word.split('/');
             wordSplited[wordSplited.length - 1] = '<span class="filename">' + wordSplited[wordSplited.length - 1] + '</span>';
             currentArray[index] = wordSplited.join('/');
-        }
-        else {
+        } else {
             currentArray[index] = word;
         }
     });
