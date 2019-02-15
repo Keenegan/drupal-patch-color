@@ -94,7 +94,6 @@ extractFileInfo();
 lines.forEach(function (line) {
 
     if (line.startsWith('@@ ', 0)) {
-        codeStarted = true;
         updateLastDiff();
 
         let lineSplited = line.split(' ');
@@ -114,7 +113,14 @@ lines.forEach(function (line) {
         editedLength = edited[1];
         edited = edited[0].replace('+', '');
 
+    } else if (line.startsWith('diff', 0)) {
+        codeStarted = true;
+        line = colorFileName(line);
+        diffInfoLines += line;
+        numberOfChangedFiles++;
     } else if (codeStarted === false) {
+        diffInfoLines += line + '</br>';
+    } else if (line === '-- ') {
         diffInfoLines += line + '</br>';
     } else if (line.startsWith('+++ ', 0) || line.startsWith('--- ', 0)) {
         diffInfoLines += line + '</br>';
@@ -135,10 +141,6 @@ lines.forEach(function (line) {
         newLineDeleted += '<span class="line"><span>' + line + '</span></span>\n';
         initial++;
         edited++;
-    } else if (line.startsWith('diff', 0)) {
-        line = colorFileName(line);
-        diffInfoLines += line;
-        numberOfChangedFiles++;
     } else {
         diffInfoLines += line + '</br>';
     }
@@ -260,7 +262,6 @@ printIntroBlock();
  * Print introduction block containing info about number of changed files, additions, and deletions
  */
 function printIntroBlock() {
-
     if (fileInfoLines !== '') {
         return
     }
