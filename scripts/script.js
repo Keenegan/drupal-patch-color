@@ -57,11 +57,10 @@ class Diff {
         let linesDel = document.createElement('delete');
 
         // If this is a new file, don't print the "old code" bloc
-        if (this.oldCode !== '') {
+        if (this.oldCode !== '' && this.oldCode !== undefined) {
             let bloc1 = document.createElement('bloc');
             bloc1.className = 'left-bloc';
             bloc1.innerHTML = this.oldCode;
-            codeBloc.appendChild(bloc1);
             // Bind scroll event on both code blocs
             bloc1.addEventListener('scroll', scrollEvent, false);
             bloc2.addEventListener('scroll', scrollEvent, false);
@@ -72,9 +71,9 @@ class Diff {
 
         blocMeta.innerHTML = '<p>' + this.meta + '</p>';
 
-        bloc2.innerHTML = this.newCode;
-        linesAdd.innerHTML = this.newCodeLineNumber;
-        linesDel.innerHTML = this.oldCodeLineNumber;
+        bloc2.innerHTML = this.newCode !== undefined ? this.newCode : '';
+        linesAdd.innerHTML = this.newCodeLineNumber !== undefined ? this.newCodeLineNumber : '';
+        linesDel.innerHTML = this.oldCodeLineNumber !== undefined ? this.oldCodeLineNumber : '';
 
         codeBloc.appendChild(linesBloc);
         linesBloc.appendChild(linesDel);
@@ -262,7 +261,7 @@ printIntroBlock();
  * Print introduction block containing info about number of changed files, additions, and deletions
  */
 function printIntroBlock() {
-    if (fileInfoLines !== '') {
+    if (fileInfoLines !== '' || (numberOfChangedFiles === 0 && numberOfAdditions === 0 && numberOfDeletions === 0)) {
         return
     }
 
