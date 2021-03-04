@@ -16,7 +16,7 @@
         "scripts/script.js"
       ],
       "css": [
-        "styles/style.css"
+        "styles/css/styles.css"
       ]
     }
   ]

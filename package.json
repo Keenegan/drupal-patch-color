@@ -4,7 +4,8 @@
   "description": "Add coloration for drupal.org patches",
   "main": "script.js",
   "scripts": {
-    "zip": "node automation/zip.js"
+    "zip": "node automation/zip.js",
+    "scss": "sass styles/scss:styles/css"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,6 @@
   "homepage": "https://github.com/Keenegan/drupal-patch-color#readme",
   "dependencies": {
     "archiver": "^3.0.0",
-    "node-sass": "^5.0.0"
+    "sass": "^1.32.8"
   }
 }
