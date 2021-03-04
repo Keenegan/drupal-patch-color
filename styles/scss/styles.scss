@@ -1,0 +1,121 @@
+body {
+  color: #0F151F;
+  font-family: sans-serif;
+  font-size: 12px;
+}
+
+codebloc {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin-bottom: 15px;
+  color: #20242f;
+}
+
+.left-bloc {
+  background-color: #d9edf7;
+}
+
+bloc {
+  flex: 1;
+  white-space: nowrap;
+  overflow-x: auto;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+line-bloc {
+  display: flex;
+  background-color: #f6f6f6;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  color: #878787;
+  padding: 0 10px;
+
+}
+
+line-bloc span {
+  min-width: 30px;
+  text-align: center;
+}
+
+add {
+  display: flex;
+  flex-direction: column;
+}
+
+delete {
+  display: flex;
+  flex-direction: column;
+}
+
+blocMeta {
+  width: 100%;
+}
+
+blocMeta p {
+  width: 100%;
+  background-color: #f6f6f6;
+  margin-bottom: 0;
+  padding-bottom: 14px;
+}
+
+.plus {
+  background: rgb(102, 187, 106);
+  background: rgba(102, 187, 106, .3);
+}
+
+.minus {
+  background: rgb(211, 47, 47);
+  background: rgba(211, 47, 47, .3);
+}
+
+.filename {
+  color: black;
+}
+
+b {
+  color: #2d466a;
+}
+
+.line {
+  display: flex;
+  flex-direction: row;
+  white-space: pre;
+}
+
+.line-number {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: flex;
+  color: #24292e;
+}
+
+.new-line-number {
+  padding-left: 0;
+}
+
+/***********************************************************
+INTRO BLOCK
+***********************************************************/
+
+blockIntro {
+  display: block;
+  background-color: #f6f6f6;
+  padding: 5px;
+
+  p {
+    margin: 0;
+  }
+
+  .additions {
+    color: rgb(71, 138, 75);
+  }
+
+  .deletions {
+    color: rgb(211, 47, 47);
+  }
+}
+
