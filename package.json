@@ -5,7 +5,7 @@
   "main": "script.js",
   "scripts": {
     "zip": "node automation/zip.js",
-    "scss": "sass --watch styles/scss:styles/css"
+    "scss": "sass --watch styles/scss/styles.scss:styles/css/styles.css"
   },
   "repository": {
     "type": "git",
