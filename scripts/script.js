@@ -61,6 +61,7 @@ class Diff {
             let bloc1 = document.createElement('bloc');
             bloc1.className = 'left-bloc';
             bloc1.innerHTML = this.oldCode;
+            codeBloc.appendChild(bloc1);
             // Bind scroll event on both code blocs
             bloc1.addEventListener('scroll', scrollEvent, false);
             bloc2.addEventListener('scroll', scrollEvent, false);
