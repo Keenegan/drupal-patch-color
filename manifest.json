@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "name": "drupal-patch-color",
-  "version": "1.5.4",
-  "description": "Add coloration for drupal.org patchs",
+  "version": "1.5.5",
+  "description": "Add coloration for drupal.org patch",
   "icons": {
     "48": "icons/icon48.png"
   },
