@@ -1,7 +1,8 @@
+@use 'colors';
+
 body {
-  color: #0F151F;
   font-family: sans-serif;
-  font-size: 12px;
+  font-size: 1.1rem;
 }
 
 codebloc {
@@ -9,11 +10,7 @@ codebloc {
   flex-wrap: wrap;
   flex-direction: row;
   margin-bottom: 15px;
-  color: #20242f;
-}
-
-.left-bloc {
-  background-color: #d9edf7;
+  color: var(--code-color);
 }
 
 bloc {
@@ -26,17 +23,15 @@ bloc {
 
 line-bloc {
   display: flex;
-  background-color: #f6f6f6;
+  background-color: var(--line-bar-background-color);
   border-left: 1px solid black;
   border-right: 1px solid black;
   color: #878787;
   padding: 0 10px;
-
-}
-
-line-bloc span {
-  min-width: 30px;
-  text-align: center;
+  span {
+    min-width: 30px;
+    text-align: center;
+  }
 }
 
 add {
@@ -51,13 +46,12 @@ delete {
 
 blocMeta {
   width: 100%;
-}
-
-blocMeta p {
-  width: 100%;
-  background-color: #f6f6f6;
-  margin-bottom: 0;
-  padding-bottom: 14px;
+  p {
+    width: 100%;
+    background-color: var(--line-bar-background-color);
+    margin-bottom: 0;
+    padding-bottom: 14px;
+  }
 }
 
 .plus {
@@ -71,7 +65,7 @@ blocMeta p {
 }
 
 .filename {
-  color: black;
+  font-weight: bold;
 }
 
 b {
@@ -103,7 +97,7 @@ INTRO BLOCK
 
 blockIntro {
   display: block;
-  background-color: #f6f6f6;
+  background-color: var(--line-bar-background-color);
   padding: 5px;
 
   p {
