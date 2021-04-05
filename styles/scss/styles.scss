@@ -13,10 +13,6 @@ codebloc {
   color: var(--code-color);
 }
 
-.left-bloc {
-  background-color: #d9edf7;
-}
-
 bloc {
   flex: 1;
   white-space: nowrap;
@@ -32,12 +28,10 @@ line-bloc {
   border-right: 1px solid black;
   color: #878787;
   padding: 0 10px;
-
-}
-
-line-bloc span {
-  min-width: 30px;
-  text-align: center;
+  span {
+    min-width: 30px;
+    text-align: center;
+  }
 }
 
 add {
