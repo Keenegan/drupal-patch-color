@@ -10,7 +10,8 @@
     {
       "matches": [
         "*://*.drupal.org/*.diff",
-        "*://*.drupal.org/*.patch"
+        "*://*.drupal.org/*.patch",
+        "*://git.drupalcode.org/*.patch"
       ],
       "js": [
         "scripts/script.js"
