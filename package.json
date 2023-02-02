@@ -23,6 +23,6 @@
   "dependencies": {
     "archiver": "^3.0.0",
     "sass": "^1.32.8",
-    "web-ext": "^6.3.0"
+    "web-ext": "^7.5.0"
   }
 }
